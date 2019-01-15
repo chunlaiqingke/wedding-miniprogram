@@ -6,6 +6,6 @@
   width: 100%;
 }
 .imgList .imgList-li .img{
-  width: 320rpx;
-  height: 320rpx;
+  width: 350rpx;
+  height: 350rpx;
 }
