@@ -104,12 +104,7 @@ Page({
       },
       success(res) {
         if (res.statusCode == 200) { //请求成功
-          // that.data.imgArr.concat(res.data.images);
-          if (res.data.images != null){
-            for (var i in res.data.images){
-              that.data.imgArr.push(i);
-            }
-          }
+          that.setData({imgArr:that.data.imgArr.concat(res.data.images)});
         } else {
           wx.showToast({
             title: '请求失败',
