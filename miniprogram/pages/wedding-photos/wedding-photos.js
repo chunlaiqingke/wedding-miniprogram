@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imageUrl:'http://a.hiphotos.baidu.com/image/pic/item/5ab5c9ea15ce36d3bdfb529637f33a87e850b19d.jpg',
+    page:0,
     imgArr: [
       
     ]
@@ -32,7 +32,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8080/images/folder/page?userId=1&prefix=wedding', //请求地址
+      url: 'http://10.32.240.129:8080/images/folder/page?userId=1&prefix=thumbnail', //请求地址
       data: {
       },
       header: {
@@ -89,8 +89,33 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    var that = this;
+    that.setData({page: that.data.page + 1})
     wx.request({ //到底时也要继续请求图片展示出来,分页请求
-      url: '',
+      url: 'http://10.32.240.129:8080/images/folder/page',
+      data:{
+        userId:1,
+        prefix:'thumbnail',
+        page:that.data.page,
+        pageSize:10
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {
+        if (res.statusCode == 200) { //请求成功
+          // that.data.imgArr.concat(res.data.images);
+          if (res.data.images != null){
+            for (var i in res.data.images){
+              that.data.imgArr.push(i);
+            }
+          }
+        } else {
+          wx.showToast({
+            title: '请求失败',
+          })
+        }
+      }
     })
   },
 

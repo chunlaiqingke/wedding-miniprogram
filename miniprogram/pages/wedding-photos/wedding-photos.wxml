@@ -1,6 +1,11 @@
 <!--index.wxml-->
 <scroll-view class='imgList'>
   <view class='imgList-li' wx:for='{{imgArr}}'>
-    <image class='img' src='{{item}}' data-index='{{index}}' bindtap='previewImg'></image>
+    <view style="float:left">
+      <image class='img' mode='aspectFill' src='{{item}}' wx:if='{{index%2==0}}' data-index='{{index}}' bindtap='previewImg'></image>
+    </view>
+    <view style="float:right">
+      <image class='img' mode='aspectFill' src='{{item}}' wx:if='{{index%2==1}}' data-index='{{index}}' bindtap='previewImg'></image>
+    </view>
   </view>
 </scroll-view>
