@@ -24,6 +24,17 @@ Page({
     })
   },
 
+  download: function (options){
+    var that = this;
+    const downloadTask = wx.downloadFile({
+      url: "https://api.jweddingpic.cn/wedding/images/id?userId=1&id=1",
+      success: function (res){
+        if(res.code === 200){
+          console.log(res.tempFilePath);
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    * 
@@ -32,7 +43,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.request({
-      url: 'http://10.32.240.129:8080/images/folder/page?userId=1&prefix=thumbnail', //请求地址
+      url: 'https://api.jweddingpic.cn/wedding/images/folder/page?userId=1&prefix=thumbnail', //请求地址
       data: {
       },
       header: {
@@ -92,7 +103,7 @@ Page({
     var that = this;
     that.setData({page: that.data.page + 1})
     wx.request({ //到底时也要继续请求图片展示出来,分页请求
-      url: 'http://10.32.240.129:8080/images/folder/page',
+      url: 'https://api.jweddingpic.cn/wedding/images/folder/page',
       data:{
         userId:1,
         prefix:'thumbnail',
