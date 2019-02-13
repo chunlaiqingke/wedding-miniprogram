@@ -9,7 +9,19 @@
       style="background-image: url({{avatarUrl}})"
     ></button>
     <navigator url='../wedding-photos/wedding-photos' open-type='navigate' class='uploader-text'>
-      <text>wedding</text>
+      <text>底片</text>
+    </navigator>
+  </view>
+
+  <view class='userinfo'>
+    <button 
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+    ></button>
+    <navigator url='../wedding-photos/wedding-truing' open-type='navigate' class='uploader-text'>
+      <text>精修</text>
     </navigator>
   </view>
 

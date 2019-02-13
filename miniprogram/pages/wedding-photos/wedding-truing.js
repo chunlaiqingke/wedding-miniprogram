@@ -1,14 +1,14 @@
-// pages/wedding-photos/wedding-photos.js
+// pages/wedding-photos/wedding-truing.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    page:0,
-    lastPageReloadTimes:0,
+    page: 0,
+    lastPageReloadTimes: 0,
     imgArr: [
-      
+
     ]
   },
 
@@ -19,18 +19,18 @@ Page({
     wx.previewImage({
       current: imgArr[index],     //当前图片地址
       urls: imgArr,         //所有要预览的图片的地址集合 数组形式
-      success: function (res) {},
-      fail: function (res) {},
-      complete: function (res) {},
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
 
-  download: function (options){
+  download: function (options) {
     var that = this;
     const downloadTask = wx.downloadFile({
       url: "https://api.jweddingpic.cn/wedding/images/id?userId=1&id=1",
-      success: function (res){
-        if(res.code === 200){
+      success: function (res) {
+        if (res.code === 200) {
           console.log(res.tempFilePath);
         }
       }
@@ -46,15 +46,15 @@ Page({
     wx.request({
       url: 'https://api.jweddingpic.cn/wedding/images/folder/page', //请求地址
       data: {
-        userId: 1,
-        prefix: 'thumbnail',
-        tagId: 1,
+        userId:1,
+        prefix:'thumbnail',
+        tagId:2
       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
-        if(res.statusCode == 200){ //请求成功
+        if (res.statusCode == 200) { //请求成功
           that.setData({ imgArr: res.data.images });
         } else {
           wx.showToast({
@@ -105,31 +105,31 @@ Page({
    */
   onReachBottom: function () {
     var that = this;
-    that.setData({page: that.data.page + 1})
+    that.setData({ page: that.data.page + 1 })
     wx.request({ //到底时也要继续请求图片展示出来,分页请求
       url: 'https://api.jweddingpic.cn/wedding/images/folder/page',
-      data:{
-        userId:1,
-        prefix:'thumbnail',
-        tagId: 1,
-        page:that.data.page,
-        pageSize:10
+      data: {
+        userId: 1,
+        prefix: 'thumbnail',
+        tagId: 2,
+        page: that.data.page,
+        pageSize: 10
       },
       header: {
         'content-type': 'application/json' // 默认值
       },
       success(res) {
         if (res.statusCode == 200) { //请求成功
-          if(res.data.images.length > 0){
-            that.setData({imgArr:that.data.imgArr.concat(res.data.images)});
+          if (res.data.images.length > 0) {
+            that.setData({ imgArr: that.data.imgArr.concat(res.data.images) });
           } else {
-            if(that.data.lastPageReloadTimes === 0){
-              that.setData({lastPageReloadTimes:that.data.lastPageReloadTimes + 1});
+            if (that.data.lastPageReloadTimes === 0) {
+              that.setData({ lastPageReloadTimes: that.data.lastPageReloadTimes + 1 });
               wx.showToast({
                 title: '没有了',
                 icon: 'none',
               })
-            } else if (that.data.lastPageReloadTimes === 1){
+            } else if (that.data.lastPageReloadTimes === 1) {
               that.setData({ lastPageReloadTimes: that.data.lastPageReloadTimes + 1 });
               wx.showModal({
                 title: '我再说一遍',

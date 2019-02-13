@@ -1,0 +1,11 @@
+/* pages/wedding-photos/wedding-truing.wxss */
+.imgList{
+  width: 100%;
+}
+.imgList .imgList-li{
+  width: 100%;
+}
+.imgList .imgList-li .img{
+  width: 350rpx;
+  height: 350rpx;
+}

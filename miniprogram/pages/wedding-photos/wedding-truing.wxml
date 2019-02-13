@@ -1,4 +1,3 @@
-<!--wedding-photos.wxml-->
 <scroll-view class='imgList'>
   <view class='imgList-li' wx:for='{{imgArr}}'>
     <view style="float:left">
